@@ -5,16 +5,15 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.6.9</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <version>3.1.2</version>
     </parent>
-    <groupId>com.codingworld</groupId>
-    <artifactId>spring-batch</artifactId>
+    <groupId>com.system</groupId>
+    <artifactId>agendit-scheduler</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>spring-batch</name>
-    <description>springbatch quartz job</description>
+    <name>agendit-scheduler</name>
+    <description>Scheduler that handles notifications to clients</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>20</java.version>
     </properties>
     <dependencies>
         <dependency>
@@ -27,23 +26,23 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.14.1</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>1.5.3.Final</version>
         </dependency>
     </dependencies>
 
@@ -52,13 +51,21 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.5.1</version>
                 <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
+                    <source>20</source>
+                    <target>20</target>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>1.5.3.Final</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
         </plugins>
