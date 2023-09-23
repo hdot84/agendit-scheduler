@@ -7,6 +7,7 @@ import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AppointmentResponse {
+
     private Long appointmentId;
 
     private Long businessId;

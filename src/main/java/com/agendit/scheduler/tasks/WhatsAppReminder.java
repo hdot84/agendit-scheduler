@@ -42,7 +42,9 @@ public class WhatsAppReminder implements Tasklet {
         log.atInfo().log("******Starting WhatsAppReminder******");
         try {
             var business = fetchBusiness(1);
+
             log.atDebug().log("Business fetched: "+business.getBusinessId());
+
             if(!business.getBusinessConfig().getSendReminder())
                 return RepeatStatus.FINISHED;
 

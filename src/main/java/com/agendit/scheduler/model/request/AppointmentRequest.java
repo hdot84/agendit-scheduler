@@ -3,6 +3,7 @@ package com.agendit.scheduler.model.request;
 import java.util.Date;
 
 public class AppointmentRequest {
+
     private Long appointmentId;
 
     private Long businessId;
