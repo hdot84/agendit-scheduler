@@ -7,9 +7,9 @@ public class BusinessConfigResponse {
 
     private Long businessConfigId;
 
-    private Boolean sendReminder;
+    private Boolean sendWhatsAppReminder;
 
-    private Integer reminderBeforeTime;
+    private Integer whatsappReminderBeforeTime;
 
     public Long getBusinessConfigId() {
         return businessConfigId;
@@ -19,19 +19,19 @@ public class BusinessConfigResponse {
         this.businessConfigId = businessConfigId;
     }
 
-    public Boolean getSendReminder() {
-        return sendReminder;
+    public Boolean getSendWhatsAppReminder() {
+        return sendWhatsAppReminder;
     }
 
-    public void setSendReminder(Boolean sendReminder) {
-        this.sendReminder = sendReminder;
+    public void setSendWhatsAppReminder(Boolean sendWhatsAppReminder) {
+        this.sendWhatsAppReminder = sendWhatsAppReminder;
     }
 
-    public Integer getReminderBeforeTime() {
-        return reminderBeforeTime;
+    public Integer getWhatsappReminderBeforeTime() {
+        return whatsappReminderBeforeTime;
     }
 
-    public void setReminderBeforeTime(Integer reminderBeforeTime) {
-        this.reminderBeforeTime = reminderBeforeTime;
+    public void setWhatsappReminderBeforeTime(Integer whatsappReminderBeforeTime) {
+        this.whatsappReminderBeforeTime = whatsappReminderBeforeTime;
     }
 }

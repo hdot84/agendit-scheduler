@@ -45,7 +45,7 @@ public class WhatsAppReminder implements Tasklet {
 
             log.atDebug().log("Business fetched: "+business.getBusinessId());
 
-            if(!business.getBusinessConfig().getSendReminder())
+            if(!business.getBusinessConfig().getSendWhatsAppReminder())
                 return RepeatStatus.FINISHED;
 
             var appointments = fetchAppointments(business);
@@ -85,7 +85,7 @@ public class WhatsAppReminder implements Tasklet {
         var currentTimeNow = Calendar.getInstance();
         var currentTimeAhead = Calendar.getInstance();
 
-        currentTimeAhead.add(Calendar.MINUTE, business.getBusinessConfig().getReminderBeforeTime());
+        currentTimeAhead.add(Calendar.MINUTE, business.getBusinessConfig().getWhatsappReminderBeforeTime());
 
         var formattedStartDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(currentTimeNow.getTime()).replace(" ", "%20");
         var formattedEndDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(currentTimeAhead.getTime()).replace(" ", "%20");
