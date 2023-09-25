@@ -22,7 +22,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 
 @Configuration
-public class QuartzConfig
+    public class QuartzConfig
 {
     @Autowired
     private JobLauncher jobLauncher;
@@ -73,7 +73,7 @@ public class QuartzConfig
     {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder
                 .simpleSchedule()
-                .withIntervalInSeconds(10)
+                .withIntervalInSeconds(5)
                 .repeatForever();
 
         return TriggerBuilder
@@ -104,9 +104,9 @@ public class QuartzConfig
     public SchedulerFactoryBean schedulerFactoryBean() throws IOException
     {
         SchedulerFactoryBean scheduler = new SchedulerFactoryBean();
-        scheduler.setTriggers(jobOneTrigger(), jobTwoTrigger());
+        scheduler.setTriggers(jobOneTrigger());
         scheduler.setQuartzProperties(quartzProperties());
-        scheduler.setJobDetails(jobOneDetail(), jobTwoDetail());
+        scheduler.setJobDetails(jobOneDetail());
         return scheduler;
     }
 
