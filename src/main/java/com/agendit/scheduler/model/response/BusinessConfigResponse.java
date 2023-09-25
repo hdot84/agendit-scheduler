@@ -9,7 +9,13 @@ public class BusinessConfigResponse {
 
     private Boolean sendWhatsAppReminder;
 
-    private Integer whatsappReminderBeforeTime;
+    private Integer whatsAppReminderBeforeTime;
+
+    private String whatsAppMessageVersion;
+
+    private String whatsAppMessageId;
+
+    private String whatsAppAccessToken;
 
     public Long getBusinessConfigId() {
         return businessConfigId;
@@ -27,11 +33,35 @@ public class BusinessConfigResponse {
         this.sendWhatsAppReminder = sendWhatsAppReminder;
     }
 
-    public Integer getWhatsappReminderBeforeTime() {
-        return whatsappReminderBeforeTime;
+    public Integer getWhatsAppReminderBeforeTime() {
+        return whatsAppReminderBeforeTime;
     }
 
-    public void setWhatsappReminderBeforeTime(Integer whatsappReminderBeforeTime) {
-        this.whatsappReminderBeforeTime = whatsappReminderBeforeTime;
+    public void setWhatsAppReminderBeforeTime(Integer whatsAppReminderBeforeTime) {
+        this.whatsAppReminderBeforeTime = whatsAppReminderBeforeTime;
+    }
+
+    public String getWhatsAppMessageVersion() {
+        return whatsAppMessageVersion;
+    }
+
+    public void setWhatsAppMessageVersion(String whatsAppMessageVersion) {
+        this.whatsAppMessageVersion = whatsAppMessageVersion;
+    }
+
+    public String getWhatsAppMessageId() {
+        return whatsAppMessageId;
+    }
+
+    public void setWhatsAppMessageId(String whatsAppMessageId) {
+        this.whatsAppMessageId = whatsAppMessageId;
+    }
+
+    public String getWhatsAppAccessToken() {
+        return whatsAppAccessToken;
+    }
+
+    public void setWhatsAppAccessToken(String whatsAppAccessToken) {
+        this.whatsAppAccessToken = whatsAppAccessToken;
     }
 }

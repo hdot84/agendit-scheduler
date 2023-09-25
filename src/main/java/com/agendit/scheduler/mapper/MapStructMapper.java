@@ -9,5 +9,6 @@ public interface MapStructMapper {
 
     @Mapping(target = "serviceId", source = "service.serviceId")
     @Mapping(target = "professionalId", source = "professional.professionalId")
+    @Mapping(target = "branchId", source = "branch.branchId")
     AppointmentRequest appointmentResponseToAppointmentRequest(com.agendit.scheduler.model.response.AppointmentResponse appointment);
 }

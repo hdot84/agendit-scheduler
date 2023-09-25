@@ -12,7 +12,7 @@ public class AppointmentResponse {
 
     private Long businessId;
 
-    private Long branchId;
+    private BranchResponse branch;
 
     private ProfessionalResponse professional;
 
@@ -42,12 +42,12 @@ public class AppointmentResponse {
         this.businessId = businessId;
     }
 
-    public Long getBranchId() {
-        return branchId;
+    public BranchResponse getBranch() {
+        return branch;
     }
 
-    public void setBranchId(Long branchId) {
-        this.branchId = branchId;
+    public void setBranch(BranchResponse branch) {
+        this.branch = branch;
     }
 
     public ProfessionalResponse getProfessional() {

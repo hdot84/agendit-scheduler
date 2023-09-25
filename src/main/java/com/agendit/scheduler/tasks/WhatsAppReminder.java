@@ -23,8 +23,7 @@ import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Calendar;
 import java.util.List;
-
-
+import java.util.Locale;
 
 public class WhatsAppReminder implements Tasklet {
 
@@ -52,7 +51,7 @@ public class WhatsAppReminder implements Tasklet {
 
             for (var appointment :appointments) {
                 try {
-                    sendReminder(appointment);
+                    sendReminder(business, appointment);
                     updateAppointmentStatus(appointment);
                 } catch (IllegalArgumentException | WhatsAppMessageException e){
                     log.atError().log(e.getLocalizedMessage());
@@ -85,7 +84,7 @@ public class WhatsAppReminder implements Tasklet {
         var currentTimeNow = Calendar.getInstance();
         var currentTimeAhead = Calendar.getInstance();
 
-        currentTimeAhead.add(Calendar.MINUTE, business.getBusinessConfig().getWhatsappReminderBeforeTime());
+        currentTimeAhead.add(Calendar.MINUTE, business.getBusinessConfig().getWhatsAppReminderBeforeTime());
 
         var formattedStartDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(currentTimeNow.getTime()).replace(" ", "%20");
         var formattedEndDate = new SimpleDateFormat("dd/MM/yyyy HH:mm").format(currentTimeAhead.getTime()).replace(" ", "%20");
@@ -123,12 +122,15 @@ public class WhatsAppReminder implements Tasklet {
         }
     }
 
-    private void sendReminder(AppointmentResponse appointmentResponse) throws URISyntaxException, IOException, InterruptedException, WhatsAppMessageException {
+    private void sendReminder(Business business, AppointmentResponse appointmentResponse) throws URISyntaxException, IOException, InterruptedException, WhatsAppMessageException {
         log.atInfo().log("Message sent to : "+ appointmentResponse.getCustomerPhone());
-        HttpRequest request = HttpRequest.newBuilder().uri(new URI("https://graph.facebook.com/v17.0/126798833852714/messages"))
-                .header("Authorization", "Bearer EAALrrKwER5UBOyPOECZCsE1h57cjZCOqOQ26mogfCIJaB8FIoWwUlJzCcZAD3FBa2Uq9kc8TWDCv7jeV07MZAL8crFXJv6ouQK7XHNGs16dNy761b4W2VydGtRVhS9K4keCOjHUulhIKO3JmDg2K57sW1ZCqq1ZCwicZAxudj2j4bZCBpZBOHVlcS7SGQmgjqhrz9VjdtJweTcFssJ8KNrsD07BVRBu86Mh3sLBAZD")
+
+        var formattedStartDate = new SimpleDateFormat("EEEE, dd LLLL yyyy HH:mm", Locale.forLanguageTag("es-ES")).format(appointmentResponse.getAppointmentDateStart());
+
+        HttpRequest request = HttpRequest.newBuilder().uri(new URI("https://graph.facebook.com/v17.0/"+business.getBusinessConfig().getWhatsAppMessageId()+"/messages"))
+                .header("Authorization", "Bearer "+business.getBusinessConfig().getWhatsAppAccessToken().trim())
                 .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString("" +
+                .POST(HttpRequest.BodyPublishers.ofString(
                         "{\n" +
                         "    \"messaging_product\": \"whatsapp\",\n" +
                         "    \"to\": \""+ appointmentResponse.getCustomerPhone()+"\",\n" +
@@ -138,13 +140,38 @@ public class WhatsAppReminder implements Tasklet {
                         "        \"language\": {\n" +
                         "            \"code\": \"es_AR\"\n" +
                         "        },\n" +
-                        "        \"components\": [{\n" +
-                        "            \"type\" : \"header\",\n" +
-                        "            \"parameters\" : [{\n" +
-                        "                \"type\" : \"text\",\n" +
-                        "                \"text\" : \""+ appointmentResponse.getCustomerName()+"\"\n" +
-                        "            }]\n" +
-                        "        }]\n" +
+                        "       \"components\": [{\n" +
+                                "            \"type\": \"header\",\n" +
+                                "            \"parameters\" : [{                \n" +
+                                "                    \"type\": \"text\",\n" +
+                                "                    \"text\" : \""+appointmentResponse.getCustomerName()+"\"                \n" +
+                                "            }]\n" +
+                                "        },        \n" +
+                                "        {\n" +
+                                "            \"type\": \"body\",\n" +
+                                "            \"parameters\" : [\n" +
+                                "               {\n" +
+                                "                    \"type\": \"text\",\n" +
+                                "                    \"text\" : \""+appointmentResponse.getService().getServiceName()+"\"\n" +
+                                "                },\n" +
+                                "                {\n" +
+                                "                    \"type\": \"text\",\n" +
+                                "                    \"text\" : \""+appointmentResponse.getBranch().getBranchName()+"\"\n" +
+                                "                },\n" +
+                                "                {\n" +
+                                "                    \"type\": \"text\",\n" +
+                                "                    \"text\" : \""+formattedStartDate+"\"\n" +
+                                "                },\n" +
+                                "                {\n" +
+                                "                    \"type\": \"text\",\n" +
+                                "                    \"text\" : \""+appointmentResponse.getBranch().getAddress()+"\"\n" +
+                                "                },\n" +
+                                "                {\n" +
+                                "                    \"type\": \"text\",\n" +
+                                "                    \"text\" : \""+appointmentResponse.getProfessional().getProfessionalName()+"\"\n" +
+                                "                }\n" +
+                                "            ]\n" +
+                                "        }]"+
                         "    }\n" +
                         "}"))
                 .build();
