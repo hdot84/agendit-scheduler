@@ -156,6 +156,10 @@ public class WhatsAppReminder implements Tasklet {
                                 "                },\n" +
                                 "                {\n" +
                                 "                    \"type\": \"text\",\n" +
+                                "                    \"text\" : \""+business.getBusinessName()+"\"\n" +
+                                "                },\n" +
+                                "                {\n" +
+                                "                    \"type\": \"text\",\n" +
                                 "                    \"text\" : \""+appointmentResponse.getBranch().getBranchName()+"\"\n" +
                                 "                },\n" +
                                 "                {\n" +
