@@ -164,11 +164,11 @@ public class WhatsAppReminder implements Tasklet {
                                 "                },\n" +
                                 "                {\n" +
                                 "                    \"type\": \"text\",\n" +
-                                "                    \"text\" : \""+formattedStartDate+"\"\n" +
+                                "                    \"text\" : \""+appointmentResponse.getBranch().getAddress()+"\"\n" +
                                 "                },\n" +
                                 "                {\n" +
                                 "                    \"type\": \"text\",\n" +
-                                "                    \"text\" : \""+appointmentResponse.getBranch().getAddress()+"\"\n" +
+                                "                    \"text\" : \""+formattedStartDate+"\"\n" +
                                 "                },\n" +
                                 "                {\n" +
                                 "                    \"type\": \"text\",\n" +
