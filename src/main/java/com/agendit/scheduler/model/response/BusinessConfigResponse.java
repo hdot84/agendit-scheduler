@@ -7,15 +7,17 @@ public class BusinessConfigResponse {
 
     private Long businessConfigId;
 
-    private Boolean sendWhatsAppReminder;
+    private Boolean emailEnabled;
 
-    private Integer whatsAppReminderBeforeTime;
+    private Boolean smsEnabled;
 
-    private String whatsAppMessageVersion;
+    private Boolean whatsAppEnabled;
 
-    private String whatsAppMessageId;
+    private Boolean sendInitialNotification;
 
-    private String whatsAppAccessToken;
+    private Boolean sendReminder;
+
+    private Integer reminderBeforeTime;
 
     public Long getBusinessConfigId() {
         return businessConfigId;
@@ -25,43 +27,51 @@ public class BusinessConfigResponse {
         this.businessConfigId = businessConfigId;
     }
 
-    public Boolean getSendWhatsAppReminder() {
-        return sendWhatsAppReminder;
+    public Boolean getEmailEnabled() {
+        return emailEnabled;
     }
 
-    public void setSendWhatsAppReminder(Boolean sendWhatsAppReminder) {
-        this.sendWhatsAppReminder = sendWhatsAppReminder;
+    public void setEmailEnabled(Boolean emailEnabled) {
+        this.emailEnabled = emailEnabled;
     }
 
-    public Integer getWhatsAppReminderBeforeTime() {
-        return whatsAppReminderBeforeTime;
+    public Boolean getSmsEnabled() {
+        return smsEnabled;
     }
 
-    public void setWhatsAppReminderBeforeTime(Integer whatsAppReminderBeforeTime) {
-        this.whatsAppReminderBeforeTime = whatsAppReminderBeforeTime;
+    public void setSmsEnabled(Boolean smsEnabled) {
+        this.smsEnabled = smsEnabled;
     }
 
-    public String getWhatsAppMessageVersion() {
-        return whatsAppMessageVersion;
+    public Boolean getWhatsAppEnabled() {
+        return whatsAppEnabled;
     }
 
-    public void setWhatsAppMessageVersion(String whatsAppMessageVersion) {
-        this.whatsAppMessageVersion = whatsAppMessageVersion;
+    public void setWhatsAppEnabled(Boolean whatsAppEnabled) {
+        this.whatsAppEnabled = whatsAppEnabled;
     }
 
-    public String getWhatsAppMessageId() {
-        return whatsAppMessageId;
+    public Boolean getSendInitialNotification() {
+        return sendInitialNotification;
     }
 
-    public void setWhatsAppMessageId(String whatsAppMessageId) {
-        this.whatsAppMessageId = whatsAppMessageId;
+    public void setSendInitialNotification(Boolean sendInitialNotification) {
+        this.sendInitialNotification = sendInitialNotification;
     }
 
-    public String getWhatsAppAccessToken() {
-        return whatsAppAccessToken;
+    public Boolean getSendReminder() {
+        return sendReminder;
     }
 
-    public void setWhatsAppAccessToken(String whatsAppAccessToken) {
-        this.whatsAppAccessToken = whatsAppAccessToken;
+    public void setSendReminder(Boolean sendReminder) {
+        this.sendReminder = sendReminder;
+    }
+
+    public Integer getReminderBeforeTime() {
+        return reminderBeforeTime;
+    }
+
+    public void setReminderBeforeTime(Integer reminderBeforeTime) {
+        this.reminderBeforeTime = reminderBeforeTime;
     }
 }

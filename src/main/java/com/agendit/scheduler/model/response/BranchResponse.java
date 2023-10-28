@@ -10,6 +10,10 @@ public class BranchResponse {
 
     private String address;
 
+    private String telephone;
+
+    private String email;
+
     public Long getBranchId() {
         return branchId;
     }
@@ -32,5 +36,21 @@ public class BranchResponse {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

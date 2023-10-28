@@ -73,7 +73,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
     {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder
                 .simpleSchedule()
-                .withIntervalInSeconds(5)
+                .withIntervalInSeconds(10)
                 .repeatForever();
 
         return TriggerBuilder

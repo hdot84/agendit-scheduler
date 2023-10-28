@@ -9,6 +9,8 @@ public class ServiceResponse {
 
     private String serviceName;
 
+    private Integer duration;
+
     public Long getServiceId() {
         return serviceId;
     }
@@ -23,5 +25,13 @@ public class ServiceResponse {
 
     public void setServiceName(String serviceName) {
         this.serviceName = serviceName;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 }

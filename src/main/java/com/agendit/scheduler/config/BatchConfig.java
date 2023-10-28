@@ -1,7 +1,10 @@
 package com.agendit.scheduler.config;
 
-import com.agendit.scheduler.mapper.MapStructMapper;
-import com.agendit.scheduler.tasks.TaskTwo;
+import com.agendit.scheduler.httpclient.BackendHttpClient;
+import com.agendit.scheduler.model.ReminderConfig;
+import com.agendit.scheduler.service.EmailService;
+import com.agendit.scheduler.tasks.EmailReminder;
+import com.agendit.scheduler.tasks.SMSReminder;
 import com.agendit.scheduler.tasks.WhatsAppReminder;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -16,20 +19,20 @@ import org.springframework.transaction.PlatformTransactionManager;
 public class BatchConfig {
 
     @Bean
-    public Step stepOne(JobRepository jobRepository, PlatformTransactionManager transactionManager, MapStructMapper mapStructMapper){
-        return new StepBuilder("stepOne", jobRepository).tasklet(new WhatsAppReminder(mapStructMapper), transactionManager).build();
+    public Step stepOne(JobRepository jobRepository, PlatformTransactionManager transactionManager, ReminderConfig reminderConfig, BackendHttpClient backendHttpClient){
+        return new StepBuilder("stepOne", jobRepository).tasklet(new WhatsAppReminder(reminderConfig, backendHttpClient), transactionManager).build();
     }
 
     @Bean
-    public Step stepTwo(JobRepository jobRepository, PlatformTransactionManager transactionManager){
-        return new StepBuilder("stepTwo", jobRepository).tasklet(new TaskTwo(), transactionManager).build();
+    public Step stepTwo(JobRepository jobRepository, PlatformTransactionManager transactionManager, EmailService emailService, ReminderConfig reminderConfig, BackendHttpClient backendHttpClient){
+        return new StepBuilder("stepTwo", jobRepository).tasklet(new EmailReminder(emailService, reminderConfig, backendHttpClient), transactionManager).build();
     }
 
     @Bean(name="demoJobOne")
-    public Job demoJobOne(JobRepository jobRepository, PlatformTransactionManager transactionManager, MapStructMapper mapStructMapper){
+    public Job demoJobOne(JobRepository jobRepository, PlatformTransactionManager transactionManager, EmailService emailService, ReminderConfig reminderConfig, BackendHttpClient backendHttpClient){
         return new JobBuilder("demoJobOne", jobRepository)
-                .start(stepOne(jobRepository, transactionManager, mapStructMapper))
-//                .next(stepTwo(jobRepository, transactionManager))
+                .start(stepOne(jobRepository, transactionManager, reminderConfig, backendHttpClient))
+                .next(stepTwo(jobRepository, transactionManager, emailService, reminderConfig, backendHttpClient))
                 .build();
     }
 }
